@@ -1,0 +1,11 @@
+D:\lab3\src\HookCraft.Core\obj\Debug\net8.0\HookCraft.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\lab3\src\HookCraft.Core\obj\Debug\net8.0\HookCraft.Core.AssemblyInfoInputs.cache
+D:\lab3\src\HookCraft.Core\obj\Debug\net8.0\HookCraft.Core.AssemblyInfo.cs
+D:\lab3\src\HookCraft.Core\obj\Debug\net8.0\HookCraft.Core.csproj.CoreCompileInputs.cache
+D:\lab3\src\HookCraft.Core\bin\Debug\net8.0\HookCraft.Core.deps.json
+D:\lab3\src\HookCraft.Core\bin\Debug\net8.0\HookCraft.Core.dll
+D:\lab3\src\HookCraft.Core\bin\Debug\net8.0\HookCraft.Core.pdb
+D:\lab3\src\HookCraft.Core\obj\Debug\net8.0\HookCraft.Core.dll
+D:\lab3\src\HookCraft.Core\obj\Debug\net8.0\refint\HookCraft.Core.dll
+D:\lab3\src\HookCraft.Core\obj\Debug\net8.0\HookCraft.Core.pdb
+D:\lab3\src\HookCraft.Core\obj\Debug\net8.0\ref\HookCraft.Core.dll
