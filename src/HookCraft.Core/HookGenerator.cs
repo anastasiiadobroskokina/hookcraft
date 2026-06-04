@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;   // Додано для LINQ
+using System.Linq;
 
 namespace HookCraft.Core
 {
     public class HookGenerator
     {
-        public static readonly List<string> ValidStyles = new List<string>
-        {
-            "інтригуючий",
-            "гумористичний",
-            "серйозний"
-        };
+        // 1. Погане іменування (однолітерна змінна)
+        public static readonly List<string> VS = new List<string> { "інтригуючий", "гумористичний", "серйозний" };
 
         public List<GenerationRecord> History { get; private set; }
 
@@ -20,68 +16,59 @@ namespace HookCraft.Core
             History = new List<GenerationRecord>();
         }
 
-        public bool ValidateStyle(string style)
+        // 2. Довгий метод (> 30 рядків) + 3. Магічні числа та рядки
+        public bool ValidateStyle(string s)
         {
-            if (style == null)
-                throw new ArgumentNullException(nameof(style), "Стиль не може бути null");
-            if (string.IsNullOrWhiteSpace(style))
-                throw new ArgumentException("Стиль не може бути порожнім або складатися з пробілів", nameof(style));
-
-            // Виправлено: використання LINQ для регістронезалежного порівняння
-            return ValidStyles.Any(s => string.Equals(s, style.Trim(), StringComparison.OrdinalIgnoreCase));
-        }
-
-        public string GenerateHook(string topic, string style)
-        {
-            if (string.IsNullOrWhiteSpace(topic))
-                throw new ArgumentException("Тема не може бути порожньою або null", nameof(topic));
-            if (!ValidateStyle(style))
-                throw new ArgumentException($"Невідомий стиль: {style}. Допустимі: {string.Join(", ", ValidStyles)}");
-
-            string topicLower = topic.ToLower();
-            string hook;
-
-            if (topicLower.Contains("рецепт") || topicLower.Contains("паста"))
+            // 4. Надмірна вкладеність
+            if (s != null)
             {
-                if (style.Equals("інтригуючий", StringComparison.OrdinalIgnoreCase))
-                    hook = "Секрет ідеальної пасти, про який мовчать кухарі...";
-                else if (style.Equals("гумористичний", StringComparison.OrdinalIgnoreCase))
-                    hook = "Готуєш пасту? Забудь про воду з-під крана!";
+                if (s != "")
+                {
+                    // 5. Дублювання коду (повторювана логіка)
+                    var trimmed = s.Trim();
+                    if (trimmed == "інтригуючий") return true;
+                    if (trimmed == "гумористичний") return true;
+                    if (trimmed == "серйозний") return true;
+                    return false;
+                }
                 else
-                    hook = $"Як приготувати {topic} за 5 хвилин.";
-            }
-            else if (topicLower.Contains("маркетинг") || topicLower.Contains("smm"))
-            {
-                hook = style.Equals("серйозний", StringComparison.OrdinalIgnoreCase)
-                    ? "3 фішки, які піднімуть твій SMM на новий рівень."
-                    : "Чому твої пости ніхто не читає? Відповідь у першому реченні.";
+                {
+                    return false;
+                }
             }
             else
             {
-                hook = $"{char.ToUpper(style[0]) + style.Substring(1).ToLower()} гачок на тему: {topic}";
+                return false;
             }
+        }
 
-            History.Add(new GenerationRecord { Topic = topic, Style = style, Hook = hook });
-            return hook;
+        // 6. Магічне число 0.05, 0.10, 0.15 та дублювання
+        public string GenerateHook(string topic, string style)
+        {
+            if (topic == null) throw new ArgumentNullException();
+            if (style == null) throw new ArgumentNullException();
+
+            var discount = 0.0;
+            if (style == "інтригуючий")
+                discount = 0.05;
+            else if (style == "гумористичний")
+                discount = 0.10;
+            else if (style == "серйозний")
+                discount = 0.15;
+
+            // 7. Мертвий код (закоментований блок)
+            // var oldWay = topic + " - " + style;
+
+            return $"{style} гачок зі знижкою {discount}: {topic}";
         }
 
         public List<string> BulkGenerate(List<string> topics, string style)
         {
             if (topics == null || topics.Count == 0)
-                throw new ArgumentException("Список тем не може бути null або порожнім", nameof(topics));
-
+                throw new ArgumentException("Список тем не може бути null або порожнім");
             var results = new List<string>();
             foreach (var topic in topics)
-            {
-                try
-                {
-                    results.Add(GenerateHook(topic, style));
-                }
-                catch (ArgumentException ex)
-                {
-                    results.Add($"Помилка для теми '{topic}': {ex.Message}");
-                }
-            }
+                results.Add(GenerateHook(topic, style));
             return results;
         }
     }
