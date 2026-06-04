@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import json
 
 app = Flask(__name__)
 
@@ -15,5 +16,11 @@ def generate():
     style = data.get('style')
     if not topic or not style:
         return jsonify({"error": "Missing topic or style"}), 400
-    # Повертаємо тестову відповідь (без реальної генерації)
-    return jsonify({"hook": f"Ваш гачок: {topic} - {style}"}), 200
+    # Формуємо рядок з нормальними літерами
+    hook_text = f"Ваш гачок: {topic} - {style}"
+    # Використовуємо json.dumps з ensure_ascii=False
+    response = json.dumps({"hook": hook_text}, ensure_ascii=False)
+    return response, 200, {'Content-Type': 'application/json; charset=utf-8'}
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
