@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;   // Додано для LINQ
-
+//review
 namespace HookCraft.Core
 {
     public class HookGenerator
